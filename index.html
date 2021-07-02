@@ -9,48 +9,50 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
     <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/6338df07fc.js" crossorigin="anonymous"></script>
-    <title>Orinoco - Trouvez votre appareil photo de rêve</title>
+    <title>Oricamera - Trouvez votre appareil photo de rêve</title>
   </head>
 
   <body>
     <header>
         <div class="logo">
-            <img src="images/logo.png" alt="logo-img" />
-            <img src="images/logo txt.png" alt="logo-txt" />
+            <img class="logo-img" src="images/logo.png" alt="logo-img" />
+            <img class="logo-txt" src="images/logo txt.png" alt="logo-txt" />
         </div>
-        <nav>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" 
+        data-target="#navbarSupportedContent">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+        <nav id="navbarSupportedContent">
             <ul>
-                <li><a href="#">Commande</a></li>
-                <li><a href="#">Panier</a></li>
+                <li><a href="confirmation.html">Commande</a></li>
+                <li><a href="cart.html">Panier</a></li>
             </ul>
         </nav>
     </header>
 
-    <div class="list">
-        <h1>Trouver l'appareil photo de votre style</h1>
-        <div class="">
-            <div class="list-card">
-                <h2 class="list-card__title">Zurss 50S</h2>
-                <img src="images/vcam_1.jpg" alt="camera1" />
-                
+    <main>
+        <section class="container">
+            <div class="">
+                <h1>Cameras Vintages</h1>
             </div>
+        </section>
+        <section>
+            <h2>Selectionnez votre appareil photo</h2>
+            <div class="container">
+                <div></div>               
+            </div>
+        </section>
+    </main>
 
-        </div>
-
-    </div>
-
-    <footer>
-        <div class="footer-social">
-
-        </div>
-        <nav class="footer">
+    <footer class="footer">
+        <nav class="footer-nav">
             <ul>
                 <il><a href="#">À propos d'Orinoco</a></il>
-                <il><a href="#">Besoin d'aide ?</a></il>
+                <il><a href="mailto:test@test.com">Besoin d'aide ?</a></il>
             </ul>
         </nav>
     </footer>
 
-    <script type="text/javascript" src="index.js"></script>
+    <script type="text/javascript" src="orinoco.js"></script>
   </body>
 </html>
