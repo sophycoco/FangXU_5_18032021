@@ -1,4 +1,73 @@
 body {
     font-family: 'Lora', serif; 
     background-color: rgb(67.8%, 72.9%, 83.1%, 70%);
+    padding: 25px;
+    margin: 0 auto;
+}
+
+header {
+    background-color: rgb(67.8%, 72.9%, 83.1%, 70%);
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.logo-img {
+    width: 100px;
+}
+
+.logo-txt {
+    width: 180px;
+    margin: 0 0 10px -20px;
+}
+
+main {
+    margin: 25px 0;
+}
+
+footer {
+    padding: 20px 0;
+}
+
+nav ul {
+    display: flex;
+    margin-top: 30px;
+}
+
+nav li {
+    list-style: none;   
+}
+
+li a {
+    text-decoration: none;
+    color: inherit;
+    font-size: 20px;
+}
+
+.header-nav li {
+    padding-right: 25px;
+}
+
+.footer-nav ul {
+    padding-left: 0;
+    justify-content: space-between;
+    width: 30%;
+    margin: auto; 
+}
+
+h1 {
+    width: 25%;
+    margin: auto;
+    font-size: 40px;
+}
+
+h2 {
+    font-size: 30px;
+    width: 35%;
+    margin: auto;
+}
+
+footer {
+    background-color: rgb(67.8%, 72.9%, 83.1%, 70%);
 }
