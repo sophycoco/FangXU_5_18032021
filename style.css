@@ -57,15 +57,29 @@ li a {
 }
 
 h1 {
-    width: 25%;
+    width: 50%;
     margin: auto;
     font-size: 40px;
+    text-align: center;
 }
 
 h2 {
     font-size: 30px;
     width: 35%;
     margin: auto;
+    text-align: center;
+}
+
+h3 {
+    font-size: 23px;
+}
+
+.card-img {
+    width: 100%;
+}
+
+p {
+    font-size: 18px;
 }
 
 footer {

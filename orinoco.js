@@ -4,40 +4,60 @@ fetch("http://localhost:3000/api/cameras")
       return res.json();
     }
   })
-  .then(function (value) {
-    console.log(value);
-    document.querySelector(".container").innerHTML += `<div class="">
-                                                            <div class="card article">
-                                                                <div class="card-header ">
-                                                                    <h3 class="card-title">(${value.name})</h3>
+  .then(jsonArticleList => {
+    console.log(jsonArticleList);
+      for (let jsonArticle of jsonArticleList) {
+          let article = new Article(jsonArticle);
+          document.querySelector(".container").innerHTML += `<div class="">
+                                                                <div class="card article data-id=${article._id}">
+                                                                    <div class="card-header ">
+                                                                        <h3 class="card-title">${article.name}</h3>
+                                                                    </div>
+                                                                    <a href="produit.html?${article._id}"><img src="${article.imageUrl}" class="card-img" /></a>
+                                                                    <div class="card-body">
+                                                                        <p class="card-text">${article.description}</p>
+                                                                        <p class="card-lense">Objectif: ${article.lenses}</p>
+                                                                        <p class="card-price">Price: ${article.price}€</p>
+                                                                    </div>
                                                                 </div>
-                                                                <img src="${image}" class="card-img-top">
-                                                                <div class="card-body">
-                                                                    <p class="card-text">${value.description}</p>
-                                                                    <!--lenses-->
-                                                                    <p class="card-price">${value.price}</p>
-                                                                </div>
-                                                            </div>
-                                                        </div>`;
+                                                            </div>`;
+    }
+/*
+    document.querySelectorAll(".addProduct").forEach(btn => {
+        btn.addEventListener("click", function() {
+         addProducts(this.data._id);
+        });
+    });*/
   })
   .catch(function (err) {
     //An error has occurred.
   });
 
-/*function addArticle() {
-  document.querySelector(".container").innerHTML += `<div class="">
-                                                            <div class="card article">
-                                                                <div class="card-header ">
-                                                                    <h3 class="card-title">${article.name}</h3>
-                                                                </div>
-                                                                <img src="${image}" class="card-img-top">
-                                                                <div class="card-body">
-                                                                    <p class="card-text">${article.description}</p>
-                                                                    <!--lenses-->
-                                                                    <p class="card-price">${article.price}</p>
-                                                                </div>
-                                                            </div>
-                                                        </div>`;
-}
+  /**
+ * register an article
+ */
 
-addArticle(); */
+   function clickProduct(articleId){
+    let productClicked = getProduct();
+    productClicked.push({id: articlesId});
+    saveProducts(productClicked);
+  }
+  
+  function getProducts() {
+    let productClicked = localStorage.getItem("productClicked");
+    if(productClicked == null) {
+        return [];
+    }else {
+        return JSON.parse(productClicked);
+    }
+  }
+  
+  function saveProducts(productClicked) {
+    localStorage.setItem("productClicked", JSON.stringify(productClicked));
+  }
+  
+  document
+  .getElementsByClassName("article")
+  .addEventListener("click", function() {
+    
+  });
