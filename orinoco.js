@@ -35,7 +35,7 @@ fetch("http://localhost:3000/api/cameras")
 
   /**
  * register an article
- */
+ 
 
    function clickProduct(articleId){
     let productClicked = getProduct();
@@ -61,3 +61,4 @@ fetch("http://localhost:3000/api/cameras")
   .addEventListener("click", function() {
     
   });
+  */
