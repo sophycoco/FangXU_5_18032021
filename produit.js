@@ -30,19 +30,22 @@ function addProductInfo(res) {
     description.innerHTML = res.description;
     const price = document.createElement("p");
     price.innerHtML = res.price + "€";
-    const lens = document.createElement("select");
+    const lenses = document.createElement("select");
+    const optionDefault = document.createElement("option");
     optionDefault.innerHTML = "Choisisez votre objectif";
-    lens.appendChild(optionDefault);
+    lenses.appendChild(optionDefault);
     const btn = document.createElement("button");
     btn.innerHTML = "Ajouter au panier";
-    btn;addEventListener("click", function() {
+    btn.addEventListener("click", function() {
         const lenses = document.getElementsByTagName("select");
         const lensSelected = lenses[0].value;
         addToCart(lensSelected);
         alert("Ajouté au panier !");
     })
 
-    for (let i = 0; i<res.lenses.length; i = i + 1) {
+
+    
+    for (let i = 0; i<res.lenses.length; i++) {
         const option = document.createElement("option");
         option.setAttribute("value", res.lenses[i]);
         option.innerHTML = res.lenses[i];
@@ -59,7 +62,7 @@ function addProductInfo(res) {
 }
 
 const id = getId();
-get("http://localhost:3000/api/cameras/" + id)
+fetch("http://localhost:3000/api/cameras/" + id)
     .then(function(res) {
         addProductInfo(res);
     })

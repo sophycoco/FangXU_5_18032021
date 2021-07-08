@@ -61,6 +61,7 @@ h1 {
     margin: auto;
     font-size: 40px;
     text-align: center;
+    padding-bottom: 25px;
 }
 
 h2 {
@@ -68,6 +69,7 @@ h2 {
     width: 35%;
     margin: auto;
     text-align: center;
+    padding-bottom: 20px;
 }
 
 h3 {
@@ -80,6 +82,15 @@ h3 {
 
 p {
     font-size: 18px;
+}
+
+.form {
+  text-align: center;
+  padding: 20px 0 20px 0;
+}
+
+.form-control {
+    width: 240px;
 }
 
 footer {
