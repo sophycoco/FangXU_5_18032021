@@ -11,7 +11,7 @@ function addToCart(lens) {
     if (cartProduct === null) {
         cartProduct = [];
     }
-    // add to local storage
+// add to local storage
     let product = new Product(id, lensSelected);
     cartProduct.push(product);
     localStorage.setItem("cartProduct", JSON.stringify(cartProduct));
@@ -42,8 +42,6 @@ function addProductInfo(res) {
         addToCart(lensSelected);
         alert("Ajouté au panier !");
     })
-
-
     
     for (let i = 0; i<res.lenses.length; i++) {
         const option = document.createElement("option");
@@ -51,7 +49,6 @@ function addProductInfo(res) {
         option.innerHTML = res.lenses[i];
         lenses.appendChild(option);
     }
-
     container.appendChild(div);
     div.appendChild(title);
     div.appendChild(img);

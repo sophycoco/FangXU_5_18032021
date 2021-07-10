@@ -2,9 +2,15 @@
  * Gestion des produits, enregistrement d'un article en favoris, retrait d'un article des favoris et récupération de la liste des produits choisis.
  */
 
- function addProducts(articleId){
+ function addProduct(articleId){
     let productList = getProducts();
-    productList.push({id: articlesId});
+    productList.push({id: articleId});
+    saveProducts(productList);
+}
+
+function removeProduct(articleId) {
+    let productList = getProducts();
+    productList = productList.filter(product => product.id != articleId);
     saveProducts(productList);
 }
 
@@ -15,6 +21,10 @@ function getProducts() {
     }else {
         return JSON.parse(productList);
     }
+}
+
+function getProductId() {
+    return getProducts().map(product =>product.id);
 }
 
 function saveProducts(productList) {

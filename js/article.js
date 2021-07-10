@@ -1,7 +1,4 @@
-/**
- * Représentation du format d'un article
- */
- class Article{
+class Article{
     constructor(jsonArticle){
         jsonArticle && Object.assign(this, jsonArticle);
     }
