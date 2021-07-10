@@ -1,6 +1,4 @@
-/**
- * Gestion des produits, enregistrement d'un article en favoris, retrait d'un article des favoris et récupération de la liste des produits choisis.
- */
+// Gestion des produits, enregistrement d'un article en favoris, retrait d'un article des favoris et récupération de la liste des produits choisis.
 
  function addProduct(articleId){
     let productList = getProducts();

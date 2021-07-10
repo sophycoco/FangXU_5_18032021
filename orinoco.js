@@ -24,7 +24,7 @@ fetch("http://localhost:3000/api/cameras")
                                                                             <option value="${article.lenses[2]}">${article.lenses[2]}</option>
                                                                           </select>                                                                         
                                                                         </div>
-                                                                        <p class="card-text">${article.price}€</p>
+                                                                        <p class="card-text">${article.price}€</p>                                                  
                                                                     </div>
                                                                 </div>
                                                             </div>`;
