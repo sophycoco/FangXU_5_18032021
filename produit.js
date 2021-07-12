@@ -1,10 +1,11 @@
 // get id from Url
 function getId() {
     const param = window.location.search;
-    console.log(window.location);
+    console.log("window.location");
     const id = param.replace("?id=", "");
     return id;
 };
+
 // add to cart
 function addToCart(lensSelected) {
     let cartProduct = JSON.parse(localStorage.getItem("cartProduct"));
@@ -17,6 +18,16 @@ function addToCart(lensSelected) {
     localStorage.setItem("cartProduct", JSON.stringify(cartProduct));
 }
 
+const id = getId();
+fetch("http://localhost:3000/api/cameras/" + id)
+    
+/*.then(function(res) {
+    addProduct(res);
+    })
+.catch(function(err) {
+    console.log(err);
+});
+
 fetch("http://localhost:3000/api/cameras", {
     method: "POST",
     headers: {
@@ -24,44 +35,41 @@ fetch("http://localhost:3000/api/cameras", {
         'Content-Type': 'application/json',
     },
     body: JSON.stringify({ product: getProductId()})
-}).then(function (res) {
+})*/.then(function (res) {
     if (res.ok) {
       return res.json();
     }
   })
-  .then((jsonArticleList) => {
-    console.log(jsonArticleList);
-    for (let jsonArticle of jsonArticleList) {
-      let article = new Article(jsonArticle);
+// add to html  
+  .then((jsonArticle) => {
+      const article = new Article(jsonArticle);
       document.querySelector(".productcontainer").innerHTML += `<div class="">
                                                             <div class="card article data-id=${article._id}">
                                                                 <div class="card-header ">
                                                                     <h3 class="card-title">${article.name}</h3>
                                                                 </div>
-                                                                <a href="produit.html?${article._id}"><img src="${article.imageUrl}" class="card-img" /></a>
+                                                                <img src="${article.imageUrl}" class="card-img" />
                                                                 <div class="card-body">
                                                                     <p class="card-text">${article.description}</p>
                                                                     <div class="card-lense>
-                                                                        <label for="lensChoice">Objectif: </label>
+                                                                        <label for="lensChoice">Objectif : </label>
                                                                         <select id="lensChoice">
                                                                         <option value="${article.lenses[0]}">${article.lenses[0]}</option>
                                                                         <option value="${article.lenses[1]}">${article.lenses[1]}</option>
                                                                         <option value="${article.lenses[2]}">${article.lenses[2]}</option>
                                                                         </select>                                                                         
                                                                     </div>
-                                                                    <p class="card-text">${article.price}€</p>
-                                                                    <button>Ajouter au panier  </button>
+                                                                    <p class="card-text">Prix : ${article.price}€</p>
+                                                                    <button id="btn">Ajouter au panier  </button>
                                                                 </div>
                                                             </div>
-                                                        </div>`;
-    }
+                                                        </div>`;    
   });
-
-const id = getId();
-fetch("http://localhost:3000/api/cameras/" + id)
-.then(function(res) {
-    addProductInfo(res);
-    })
-.catch(function(err) {
-    console.log(err);
+// add to cart
+const btn = document.getElementById("btn");
+btn.addEventListener("click", function() {
+    const lenses = document.getElementById("lensChoice");
+    const lensSelected = lenses[0].value;
+    addToCart(lensSelected);
+    alert("Ajouté au panier !");
 });

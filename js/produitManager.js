@@ -5,12 +5,12 @@
     productList.push({id: articleId});
     saveProducts(productList);
 }
-
+/*
 function removeProduct(articleId) {
     let productList = getProducts();
     productList = productList.filter(product => product.id != articleId);
     saveProducts(productList);
-}
+} */
 
 function getProducts() {
     let productList = localStorage.getItem("productList");

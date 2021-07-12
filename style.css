@@ -96,3 +96,9 @@ p {
 footer {
     background-color: rgb(67.8%, 72.9%, 83.1%, 70%);
 }
+
+#cartinfo {
+    display: flex;
+    justify-content: space-evenly;
+    padding-bottom: 30px;
+}

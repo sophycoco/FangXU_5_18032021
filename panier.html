@@ -28,33 +28,45 @@
 
     <main>
         <h1>Validez votre commande</h1>
-        <sectiion class="cartinfo">
+        <sectiion>
             <h2>Votre panier</h2>
+            <div id="cartinfo">
+                <div>
+                    <h3>Produits Sélectionnés</h3>
+                </div>
+                <div>
+                    <h3>Objectifs Sélectionnés</h3>
+                </div>
+                <div>
+                    <h3>Prix</h3>
+                </div>
+            </div>
         </sectiion>
         <section class="custominfo">
             <h2>Pour valider votre commande, merci de remplir ce formulaire.</h2>
             <div class="form">
                 <div class="">
-                    <label>Nom</label><br />
-                    <input type="text" name="name" class="form-control" placeholder="Dupond" required>
+                    <label for="famname">Nom</label><br />
+                    <input type="text" id="famname" class="form-control" placeholder="Dupond" required>
                 </div>
                 <div class="">
-                    <label>Prénom</label><br />
-                    <input type="text" name="name" class="form-control" placeholder="Jean" required>
+                    <label for="givname">Prénom</label><br />
+                    <input type="text" id="givname" class="form-control" placeholder="Jean" required>
                 </div>
                 <div class="">
-                    <label>E-mail</label><br />
-                    <input type="email" name="mail" class="form-control" placeholder="jean.dupond@mail.fr" required>
+                    <label for="email">E-mail</label><br />
+                    <input type="email" id="email" class="form-control" placeholder="jeandupond@mail.fr" required>
                 </div>
                 <div class="">
-                    <label>Adresse</label><br />
-                    <textarea name="address" class="form-control" rows="5" required maxlength="400"></textarea>
+                    <label for="address">Adresse</label><br />
+                    <textarea id="address" class="form-control" rows="5" required maxlength="400"></textarea>
                 </div>
                 <div class="">
                     <input type="button" class="btn" value="envoyer">
                 </div>
             </div>
         </section>
+
     </main>
 
     <footer class="footer">
