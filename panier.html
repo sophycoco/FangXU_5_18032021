@@ -28,20 +28,20 @@
 
     <main>
         <h1>Validez votre commande</h1>
-        <sectiion>
+        <section id="cart">
             <h2>Votre panier</h2>
             <div id="cartinfo">
-                <div>
+                <div class="cartinfo__title cart-control">
                     <h3>Produits Sélectionnés</h3>
                 </div>
-                <div>
+                <div class="cartinfo__lense cart-control">
                     <h3>Objectifs Sélectionnés</h3>
                 </div>
-                <div>
+                <div class="cartinfo__price cart-control">
                     <h3>Prix</h3>
                 </div>
             </div>
-        </sectiion>
+        </section>
         <section class="custominfo">
             <h2>Pour valider votre commande, merci de remplir ce formulaire.</h2>
             <div class="form">
@@ -62,7 +62,7 @@
                     <textarea id="address" class="form-control" rows="5" required maxlength="400"></textarea>
                 </div>
                 <div class="">
-                    <input type="button" class="btn" value="envoyer">
+                    <input type="button" id="btn" value="envoyer">
                 </div>
             </div>
         </section>
@@ -78,8 +78,10 @@
         </nav>
     </footer>
 
+    <script type="text/javascript" src="js/commande.js"></script>
     <script type="text/javascript" src="js/article.js"></script>
-    <script type="text/javascript" src="js/produitManager.js"></script>
+    <script type="text/javascript" src="js/product.js"></script>
+    <script type="text/javascript" src="js/produitManager.js"></script>  
     <script type="text/javascript" src="panier.js"></script>
   </body>
 </html>

@@ -1,6 +1,6 @@
 class Product {
-    construction(id, lensSelected) {
-        this.lenses = lensSelected;
-        this.id = id;
-    }
+  constructor(id, lensSelected) {
+    this.id = id;
+    this.lensSelected = lensSelected;
+  }
 }
