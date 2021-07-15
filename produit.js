@@ -61,5 +61,5 @@ fetch("http://localhost:3000/api/cameras/" + id)
       alert("Ajouté au panier !");
     });
   });
-  console.log(id);
+  
   

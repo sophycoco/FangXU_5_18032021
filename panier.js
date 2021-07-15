@@ -1,18 +1,46 @@
 // sum of order
-const productContainer = document.querySelector("#cartinfo");
-const divTitle = document.getElementsByClassName("cartinfo__title cart-control");
-const camera = document.createElement("p");
-camera.innerHTML = cartProduct.name;
-const cartLenses = document.getElementsByClassName("cartinfo__lense cart-control");
-document.body.insertBefore(camera, divTitle);
-console.log(camera);
-divTitle.appendChild(camera);
+fetch("http://localhost:3000/api/cameras", {
+  method: "POST",
+  headers: {
+      'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({products: getProductId() })
+}).then(function (res) {
+    if (res.ok) {
+      return res.json();
+    }
+  })
+  .then((jsonArticleList) => {
+    console.log(jsonArticleList);
+    for (let jsonArticle of jsonArticleList) {
+      let article = new Article(jsonArticle);
+      document.querySelector("#cartinfo").innerHTML += `<div class="cartinfo__title cart-control">
+                                                            <h3>Produits Sélectionnés</h3>
+                                                            <p>${article.name}</p>
+                                                        </div>
+                                                        <div class="cartinfo__lense cart-control">
+                                                            <h3>Objectifs Sélectionnés</h3>
+                                                            <p>${article.lenses}</p>
+                                                        </div>
+                                                        <div class="cartinfo__price cart-control">
+                                                            <h3>Prix</h3>
+                                                            <p>${article.price}€</p>
+                                                        </div>`
+    }
+  })
 
-console.log(divTitle);
-function addCartProduct(productInfo, productCart, cartProduct, totalPrice) {
-  /*const productContainer = document.getElementsById("cartinfo");
 
-  const divTitle = document.getElementsByClassName("cartinfo__title cart-control");*/
+
+const cartProduct = JSON.parse(localStorage.getItem("cartProduct"));
+console.log(cartProduct);
+
+/*document.body.insertBefore(camera, divTitle);*/
+/*console.log(camera);
+
+console.log(divTitle);*/
+/*function addCartProduct(productInfo, productCart, cartProduct, totalPrice) {
+  const productContainer = document.getElementsById("cartinfo");
+  const divTitle = document.getElementsByClassName("cartinfo__title cart-control");
   const name = document.createElement("p");
   name.innerHTML = productInfo.name;
   const image = document.createElement("img");
@@ -24,10 +52,8 @@ function addCartProduct(productInfo, productCart, cartProduct, totalPrice) {
   btn.setAttribute("class", "cart-delete");
   btn.setAttribute("data-id", productInfo._id);
   const cartLenses = document.getElementsByClassName("cartinfo__lense cart-control");
-
   cartLenses.innerHTML = productCart.lenses;
   const cartPrice = document.getElementsByClassName("cartinfo__price cart-control");
-
   cartPrice.innerHTML = productInfo.price + "€";
   totalPrice = productInfo.price++;
   // delete un product from cart
@@ -68,7 +94,7 @@ document.querySelector('.form input[type="button"]').addEventListener("click", f
     alert("Votre commande a bien été envoyé.");
   }
 });
-
+/*
 // send order
 function sendOrder() {
   const famname = document.getElementById("famname").Value;
@@ -129,10 +155,10 @@ fetch("http://localhost:3000/api/cameras/")
       const totalPriceCart = document.getElementsById("total-price");
       totalPriceCart.innerHTML = "Total : " + totalPrice + "€";
     }
-    /*
+    
 if (res.ok) {
   return res.json();
-}*/
+}
   })
   .catch(function (err) {
     console.log(err);
@@ -145,4 +171,4 @@ btn.addEventListener("click", function (event) {
   if (valid == true) {
     sendOrder();
   }
-});
+});*/
