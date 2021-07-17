@@ -1,9 +1,10 @@
 class  infoForm {
-    constructor(famname, givname, email, address) {
-        this.famname = famname;
-        this.givname = givname;
+    constructor(lastName, firstName, email, address, city) {
+        this.lastName = lastName;
+        this.firstName = firstName;
         this.email = email;
         this.address = address;
+        this.city = city;
     }
 }
 

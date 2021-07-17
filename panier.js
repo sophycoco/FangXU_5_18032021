@@ -1,36 +1,4 @@
 // sum of order
-/*fetch("http://localhost:3000/api/cameras", {
-  method: "POST",
-  headers: {
-      'Content-Type': 'application/json'
-  },
-  body: JSON.stringify({products: getProductId() })
-}).then(function (res) {
-    if (res.ok) {
-      return res.json();
-    }
-  })
-  .then((jsonArticleList) => {
-    console.log(jsonArticleList);
-    for (let jsonArticle of jsonArticleList) {
-      let article = new Article(jsonArticle);
-      document.querySelector("#cartinfo").innerHTML += `<div class="cartinfo__title cart-control">
-                                                            <h3>Produits Sélectionnés</h3>
-                                                            <p>${article.name}</p>
-                                                        </div>
-                                                        <div class="cartinfo__lense cart-control">
-                                                            <h3>Objectifs Sélectionnés</h3>
-                                                            <p>${article.lenses}</p>
-                                                        </div>
-                                                        <div class="cartinfo__price cart-control">
-                                                            <h3>Prix</h3>
-                                                            <p>${article.price}€</p>
-                                                        </div>`
-    }
-  })
-*/
-
-
 const cartProduct = JSON.parse(localStorage.getItem("cartProduct"));
 console.log(cartProduct);
 const productContainer = document.querySelector("#cartinfo");
@@ -44,33 +12,62 @@ if (cartProduct === null) {
 } else {
 // if the cart is not empty, display the selected cameras 
   for(k = 0; k < cartProduct.length; k++) {
-    productContainer.innerHTML += `
-                                  <table>
-                                     <thead>
+    productContainer.innerHTML += `<table>
+                                     <!--<thead>
                                           <tr>
                                               <th>Produits Sélectionnés</th>
                                               <th>Objectifs Sélectionnés</th>
                                               <th>Prix</th>
                                           </tr>
-                                      </thead> 
+                                      </thead>  -->
                                       <tbody>
                                           <tr>
                                               <td>${cartProduct[k].camera}</td>
                                               <td>${cartProduct[k].lensSelected}</td>
-                                              <td>${cartProduct[k].priceSelected}€</td>
+                                              <td id="price">${cartProduct[k].priceSelected}€</td>
                                               <td><button>Supprimer</button></td>
                                           </tr>
                                       </tbody> 
                                   </table>`;
                                 }
 }
+// total price calculation
+const calculateTotalPrice = [];
 
+for (let m = 0; m < cartProduct.length; m++) {
+  let pricesCartProduct = cartProduct[m].priceSelected;
+  calculateTotalPrice.push(pricesCartProduct);
+  console.log(calculateTotalPrice)
+}
+const reducer = (accumulator, currentValue) => accumulator + currentValue;
+const totalPrice = calculateTotalPrice.reduce(reducer, 0);
+console.log(totalPrice)
+
+// add to HTML
+const totalPriceHtml = document.getElementById("totalprice");
+ totalPriceHtml.innerHTML += `Total price : ${totalPrice}€`
   
+// add event listener
+const btn = document.querySelector('.form button[type="button"]');
+btn.addEventListener("click", function (event) {
+  event.preventDefault();
+  // get form values and put to local storage
+  localStorage.setItem("lastname", document.querySelector("#lastname").value);
+  localStorage.setItem("firstname", document.querySelector("#firstname").value);
+  localStorage.setItem("email", document.querySelector("#email").value);
+  localStorage.setItem("address", document.querySelector("#address").value);
+  localStorage.setItem("city", document.querySelector("#city").value);
+}); 
+// put the values to an object
+const form = {
+  lastname: localStorage.getItem("lastname"),
+  firstname: localStorage.getItem("firstname"),
+  email: localStorage.getItem("email"),
+  address: localStorage.getItem("address"),
+  city: localStorage.getItem("city"),
+}
+console.log(form);
 
-/*document.body.insertBefore(camera, divTitle);*/
-/*console.log(camera);
-
-console.log(divTitle);*/
 /*
 function addCartProduct(productInfo, productCart, cartProduct, totalPrice) {
   const productContainer = document.getElementsById("cartinfo");
@@ -113,21 +110,8 @@ function addCartProduct(productInfo, productCart, cartProduct, totalPrice) {
 
   return totalPrice;
 } 
-
-// customer information form
-document.querySelector('.form button[type="button"]').addEventListener("click", function () {
-  var valid = true;
-  for (let input of document.querySelectorAll(".form input, .form textarea")) {
-    valid &= input.reportValidity();
-    if (!valid) {
-      break;
-    }
-  }
-  if (valid) {
-    alert("Votre commande a bien été envoyé.");
-  }
-});
-
+*/
+/*
 // send order
 function sendOrder() {
   const lastName = document.getElementById("lastname").Value;
@@ -136,18 +120,18 @@ function sendOrder() {
   const address = document.getElementById("address").Value;
   const city = document.getElementById("city").Value;
 
-  const formInfo = new infoForm(lastName, firstName, email, address, city);
+  const customerFormInfo = new infoForm(lastName, firstName, email, address, city);
   const cartContent = JSON.parse(localStorage.getItem("cartProduct"));
   let idOrder = [];
   for (let i = 0; i < cartContent.length; i = i++) {
     cartContent[i].id;
     idOrder.push(cartProduct[i].id);
   }
-  const order = new orderInfo(formInfo, idOrder);
+  const order = new orderInfo(customerFormInfo, idOrder);
   fetch("http://localhost:3000/api/cameras/order", {
     method: "POST",
     headers: {
-      Accept: "application/json",
+      "Accept": "application/json",
       "Content-Type": "application/json",
     },
     body: JSON.stringify(order),
@@ -161,13 +145,7 @@ function sendOrder() {
       console.log(err);
     });
 }
-
-function emptyCartMessage(cartInfo) {
-  const emptyCart = document.createElement("div");
-  emptyCart.innerHTML = "Votre panier est vide.";
-  cartInfo.appendChild(emptyCart);
-  return cartInfo;
-}
+/*
 
 fetch("http://localhost:3000/api/cameras/")
   .then(function (res) {
@@ -197,14 +175,28 @@ if (res.ok) {
   })
   .catch(function (err) {
     console.log(err);
-  });
+  });*/
+/*
+// customer information form
+document.querySelector('.form button[type="button"]').addEventListener("click", function () {
+  var valid = true;
+  for (let input of document.querySelectorAll(".form input, .form textarea")) {
+    valid &= input.reportValidity();
+    if (!valid) {
+      break;
+    }
+  }
+  if (valid) {
+    alert("Votre commande a bien été envoyé.");
+  }
+}); */
 
+/*
 const btn = document.querySelector('.form button[type="button"]');
 
 btn.addEventListener("click", function (event) {
   event.preventDefault();
-  if (valid == true) {
+  
     sendOrder();
-  }
-}); 
-*/
+  
+}); */

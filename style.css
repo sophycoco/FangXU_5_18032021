@@ -97,8 +97,18 @@ footer {
     background-color: rgb(67.8%, 72.9%, 83.1%, 70%);
 }
 
-#cartinfo {
-    display: flex;
+#carttitle {  
+    display: flex;  
     justify-content: space-evenly;
     padding-bottom: 30px;
+    text-align: center;
+}
+
+#cartinfo, table {
+    margin: auto;
+}
+
+#totalprice {
+    text-align: center;
+    font-weight: 800;
 }
