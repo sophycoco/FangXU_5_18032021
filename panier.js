@@ -1,5 +1,5 @@
 // sum of order
-fetch("http://localhost:3000/api/cameras", {
+/*fetch("http://localhost:3000/api/cameras", {
   method: "POST",
   headers: {
       'Content-Type': 'application/json'
@@ -28,17 +28,51 @@ fetch("http://localhost:3000/api/cameras", {
                                                         </div>`
     }
   })
-
+*/
 
 
 const cartProduct = JSON.parse(localStorage.getItem("cartProduct"));
 console.log(cartProduct);
+const productContainer = document.querySelector("#cartinfo");
+console.log(productContainer);
+// if the cart is empty
+if (cartProduct === null) {
+  const cartEmpty = `<div class="container-cart-empty">
+                        <div> Votre panier est vide. </div>
+                      </div>`;
+                      productContainer.innerHTML = cartEmpty;             
+} else {
+// if the cart is not empty, display the selected cameras 
+  for(k = 0; k < cartProduct.length; k++) {
+    productContainer.innerHTML += `
+                                  <table>
+                                     <thead>
+                                          <tr>
+                                              <th>Produits Sélectionnés</th>
+                                              <th>Objectifs Sélectionnés</th>
+                                              <th>Prix</th>
+                                          </tr>
+                                      </thead> 
+                                      <tbody>
+                                          <tr>
+                                              <td>${cartProduct[k].camera}</td>
+                                              <td>${cartProduct[k].lensSelected}</td>
+                                              <td>${cartProduct[k].priceSelected}€</td>
+                                              <td><button>Supprimer</button></td>
+                                          </tr>
+                                      </tbody> 
+                                  </table>`;
+                                }
+}
+
+  
 
 /*document.body.insertBefore(camera, divTitle);*/
 /*console.log(camera);
 
 console.log(divTitle);*/
-/*function addCartProduct(productInfo, productCart, cartProduct, totalPrice) {
+/*
+function addCartProduct(productInfo, productCart, cartProduct, totalPrice) {
   const productContainer = document.getElementsById("cartinfo");
   const divTitle = document.getElementsByClassName("cartinfo__title cart-control");
   const name = document.createElement("p");
@@ -78,11 +112,10 @@ console.log(divTitle);*/
   console.log(name);
 
   return totalPrice;
-}
-console.log(productContainer);
+} 
 
 // customer information form
-document.querySelector('.form input[type="button"]').addEventListener("click", function () {
+document.querySelector('.form button[type="button"]').addEventListener("click", function () {
   var valid = true;
   for (let input of document.querySelectorAll(".form input, .form textarea")) {
     valid &= input.reportValidity();
@@ -94,15 +127,16 @@ document.querySelector('.form input[type="button"]').addEventListener("click", f
     alert("Votre commande a bien été envoyé.");
   }
 });
-/*
+
 // send order
 function sendOrder() {
-  const famname = document.getElementById("famname").Value;
-  const givname = document.getElementById("givname").Value;
+  const lastName = document.getElementById("lastname").Value;
+  const firstName = document.getElementById("firstname").Value;
   const email = document.getElementById("email").Value;
   const address = document.getElementById("address").Value;
+  const city = document.getElementById("city").Value;
 
-  const formInfo = new infoForm(famname, givname, email, address);
+  const formInfo = new infoForm(lastName, firstName, email, address, city);
   const cartContent = JSON.parse(localStorage.getItem("cartProduct"));
   let idOrder = [];
   for (let i = 0; i < cartContent.length; i = i++) {
@@ -143,6 +177,7 @@ fetch("http://localhost:3000/api/cameras/")
       emptyCartMessage(cartInfo);
     } else {
       let totalPrice = 0;
+      const cartContent = JSON.parse(localStorage.getItem("cartProduct"));
       for (let productCart of cartContent) {
         for (let productInfo of res) {
           if (productCart.id == productInfo._id) {
@@ -164,11 +199,12 @@ if (res.ok) {
     console.log(err);
   });
 
-const btn = document.getElementsById("btn");
+const btn = document.querySelector('.form button[type="button"]');
 
 btn.addEventListener("click", function (event) {
   event.preventDefault();
   if (valid == true) {
     sendOrder();
   }
-});*/
+}); 
+*/

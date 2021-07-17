@@ -7,14 +7,14 @@ function getId() {
 }
 
 // add to cart
-function addToCart(lensSelected) {
+function addToCart(camera, lensSelected, priceSelected) {
   let cartProduct = JSON.parse(localStorage.getItem("cartProduct"));
-  console.log(cartProduct);
+  
   if (cartProduct == null) {
     cartProduct = [];
   }
   // add to local storage
-  let product = new Product(id, lensSelected);
+  let product = new Product(camera, id, lensSelected, priceSelected);
   console.log(product);
   cartProduct.push(product);
   localStorage.setItem("cartProduct", JSON.stringify(cartProduct));
@@ -30,6 +30,9 @@ fetch("http://localhost:3000/api/cameras/" + id)
   // add to html
   .then((jsonArticle) => {
     const article = new Article(jsonArticle);
+
+    const priceSelected = article.price;
+    const camera = article.name;
     document.querySelector(".productcontainer").innerHTML += `<div class="">
                                                             <div class="card article data-id=${article._id}">
                                                                 <div class="card-header ">
@@ -46,18 +49,19 @@ fetch("http://localhost:3000/api/cameras/" + id)
                                                                         <option value="${article.lenses[2]}">${article.lenses[2]}</option>
                                                                         </select>                                                                         
                                                                     </div>
-                                                                    <p class="card-text">Prix : ${article.price}€</p>
+                                                                    <p class="card-text" id="price">Prix : ${article.price}€</p>
                                                                     <button id="btn">Ajouter au panier </button>
                                                                 </div>
                                                             </div>
                                                         </div>`;
+                                                        
 // add to cart
-    const btn = document.getElementById("btn")
+
+    const btn = document.getElementById("btn");
     btn.addEventListener("click", function () {
       const lenses = document.getElementById("lensChoice");
       const lensSelected = lenses.value;
-      console.log(lenses.value);
-      addToCart(lensSelected);
+      addToCart(camera, lensSelected, priceSelected);
       alert("Ajouté au panier !");
     });
   });
