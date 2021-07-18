@@ -8,10 +8,10 @@ if (cartProduct === null) {
   const cartEmpty = `<div class="container-cart-empty">
                         <div> Votre panier est vide. </div>
                       </div>`;
-                      productContainer.innerHTML = cartEmpty;             
+  productContainer.innerHTML = cartEmpty;
 } else {
-// if the cart is not empty, display the selected cameras 
-  for(k = 0; k < cartProduct.length; k++) {
+  // if the cart is not empty, display the selected cameras
+  for (k = 0; k < cartProduct.length; k++) {
     productContainer.innerHTML += `<table>
                                      <!--<thead>
                                           <tr>
@@ -29,7 +29,7 @@ if (cartProduct === null) {
                                           </tr>
                                       </tbody> 
                                   </table>`;
-                                }
+  }
 }
 // total price calculation
 const calculateTotalPrice = [];
@@ -37,36 +37,80 @@ const calculateTotalPrice = [];
 for (let m = 0; m < cartProduct.length; m++) {
   let pricesCartProduct = cartProduct[m].priceSelected;
   calculateTotalPrice.push(pricesCartProduct);
-  console.log(calculateTotalPrice)
+  console.log(calculateTotalPrice);
 }
 const reducer = (accumulator, currentValue) => accumulator + currentValue;
 const totalPrice = calculateTotalPrice.reduce(reducer, 0);
-console.log(totalPrice)
+console.log(totalPrice);
 
 // add to HTML
 const totalPriceHtml = document.getElementById("totalprice");
- totalPriceHtml.innerHTML += `Total price : ${totalPrice}€`
-  
+totalPriceHtml.innerHTML += `Total price : ${totalPrice}€`;
+
 // add event listener
-const btn = document.querySelector('.form button[type="button"]');
+const btn = document.querySelector("#btn");
+console.log(btn);
 btn.addEventListener("click", function (event) {
   event.preventDefault();
+
   // get form values and put to local storage
-  localStorage.setItem("lastname", document.querySelector("#lastname").value);
-  localStorage.setItem("firstname", document.querySelector("#firstname").value);
-  localStorage.setItem("email", document.querySelector("#email").value);
-  localStorage.setItem("address", document.querySelector("#address").value);
-  localStorage.setItem("city", document.querySelector("#city").value);
-}); 
-// put the values to an object
-const form = {
-  lastname: localStorage.getItem("lastname"),
-  firstname: localStorage.getItem("firstname"),
-  email: localStorage.getItem("email"),
-  address: localStorage.getItem("address"),
-  city: localStorage.getItem("city"),
-}
-console.log(form);
+  const formValues = {
+    lastmane: document.querySelector("#lastname").value,
+    firstname: document.querySelector("#firstname").value,
+    email: document.querySelector("#email").value,
+    address: document.querySelector("#address").value,
+    city: document.querySelector("#city").value,
+  };
+  localStorage.setItem("formValues", JSON.stringify(formValues));
+
+  // put the values to an object
+  const form = {
+    lastname: localStorage.getItem("lastname"),
+    firstname: localStorage.getItem("firstname"),
+    email: localStorage.getItem("email"),
+    address: localStorage.getItem("address"),
+    city: localStorage.getItem("city"),
+  };
+
+  const toSend = {
+    cartProduct,
+    form,
+  };
+  console.log(toSend);
+
+
+
+  fetch("http://localhost:3000/api/cameras/order", {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(toSend),
+  })
+    .then(function (res) {
+      if (res.ok) {
+        return res.json();
+      }
+    })
+    .catch(function (err) {
+      //An error has occurred.
+    });
+});
+
+  // customer information form
+  document.querySelector('.form button[type="button"]').addEventListener("click", function () {
+    var valid = true;
+    for (let input of document.querySelectorAll(".form input, .form textarea")) {
+      valid &= input.reportValidity();
+      if (!valid) {
+        break;
+      }
+    }
+    if (valid) {
+      alert("Votre commande a bien été envoyé.");
+    }
+  });
 
 /*
 function addCartProduct(productInfo, productCart, cartProduct, totalPrice) {
@@ -110,8 +154,7 @@ function addCartProduct(productInfo, productCart, cartProduct, totalPrice) {
 
   return totalPrice;
 } 
-*/
-/*
+
 // send order
 function sendOrder() {
   const lastName = document.getElementById("lastname").Value;
@@ -145,7 +188,6 @@ function sendOrder() {
       console.log(err);
     });
 }
-/*
 
 fetch("http://localhost:3000/api/cameras/")
   .then(function (res) {
@@ -175,8 +217,7 @@ if (res.ok) {
   })
   .catch(function (err) {
     console.log(err);
-  });*/
-/*
+  });
 // customer information form
 document.querySelector('.form button[type="button"]').addEventListener("click", function () {
   var valid = true;
@@ -189,9 +230,9 @@ document.querySelector('.form button[type="button"]').addEventListener("click", 
   if (valid) {
     alert("Votre commande a bien été envoyé.");
   }
-}); */
+}); 
 
-/*
+
 const btn = document.querySelector('.form button[type="button"]');
 
 btn.addEventListener("click", function (event) {
