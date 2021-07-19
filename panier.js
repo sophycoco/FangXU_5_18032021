@@ -43,6 +43,8 @@ const reducer = (accumulator, currentValue) => accumulator + currentValue;
 const totalPrice = calculateTotalPrice.reduce(reducer, 0);
 console.log(totalPrice);
 
+localStorage.setItem("totalPrice", JSON.stringify(totalPrice));
+
 // add to HTML
 const totalPriceHtml = document.getElementById("totalprice");
 totalPriceHtml.innerHTML += `Total price : ${totalPrice}€`;
@@ -64,7 +66,7 @@ btn.addEventListener("click", function (event) {
   localStorage.setItem("formValues", JSON.stringify(formValues));
 
   // put the values to an object
-  const form = {
+  const contact = {
     lastname: localStorage.getItem("lastname"),
     firstname: localStorage.getItem("firstname"),
     email: localStorage.getItem("email"),
@@ -74,11 +76,10 @@ btn.addEventListener("click", function (event) {
 
   const toSend = {
     cartProduct,
-    form,
+    contact,
+    totalPrice,
   };
   console.log(toSend);
-
-
 
   fetch("http://localhost:3000/api/cameras/order", {
     method: "POST",
@@ -88,73 +89,33 @@ btn.addEventListener("click", function (event) {
     },
     body: JSON.stringify(toSend),
   })
-    .then(function (res) {
-      if (res.ok) {
-        return res.json();
-      }
+    .then(async(res) => {
+      //localStorage.setItem("cartProduct", JSON.stringify(cartProduct));
+      const content = await res.json();
+      console.log(content);
+      localStorage.setItem("resId", content._id);
+      window.location = "confirmation.html";
     })
     .catch(function (err) {
       //An error has occurred.
     });
 });
 
-  // customer information form
-  document.querySelector('.form button[type="button"]').addEventListener("click", function () {
-    var valid = true;
-    for (let input of document.querySelectorAll(".form input, .form textarea")) {
-      valid &= input.reportValidity();
-      if (!valid) {
-        break;
-      }
+// customer information form
+document.querySelector('.form button[type="button"]').addEventListener("click", function () {
+  var valid = true;
+  for (let input of document.querySelectorAll(".form input, .form textarea")) {
+    valid &= input.reportValidity();
+    if (!valid) {
+      break;
     }
-    if (valid) {
-      alert("Votre commande a bien été envoyé.");
-    }
-  });
+  }
+  if (valid) {
+    alert("Votre commande a bien été envoyé.");
+  }
+});
 
 /*
-function addCartProduct(productInfo, productCart, cartProduct, totalPrice) {
-  const productContainer = document.getElementsById("cartinfo");
-  const divTitle = document.getElementsByClassName("cartinfo__title cart-control");
-  const name = document.createElement("p");
-  name.innerHTML = productInfo.name;
-  const image = document.createElement("img");
-  image.innerHTML = productionInfo.imageUrl;
-  image.setAttribute("src", productInfo.imageUrl);
-  image.setAttribute("width", "33%");
-  const btn = document.createElement("button");
-  btn.innerHTML = "Supprimer";
-  btn.setAttribute("class", "cart-delete");
-  btn.setAttribute("data-id", productInfo._id);
-  const cartLenses = document.getElementsByClassName("cartinfo__lense cart-control");
-  cartLenses.innerHTML = productCart.lenses;
-  const cartPrice = document.getElementsByClassName("cartinfo__price cart-control");
-  cartPrice.innerHTML = productInfo.price + "€";
-  totalPrice = productInfo.price++;
-  // delete un product from cart
-  btn.addEventListener("click", function (e) {
-    const id = e.target.getAttribute("data-id");
-    for (let x = 0; x != cartProduct.length; x++) {
-      if (cartProduct[x].id === id) {
-        cartProduct.splice(x, 1);
-        break;
-      }
-    }
-    localStorage.setItem("cartProduct", JSON.stringify(cartProduct));
-    window.location.href = "panier.html";
-  });
-
-  productContainer.appendChild(divTitle);
-  divTitle.appendChild(name);
-  divTitle.appendChild(image);
-  divTitle.appendChild(btn);
-  productContainer.appendChild(cartLense);
-  productContainer.appendChild(cartPrice);
-  console.log(name);
-
-  return totalPrice;
-} 
-
 // send order
 function sendOrder() {
   const lastName = document.getElementById("lastname").Value;

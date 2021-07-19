@@ -1,13 +1,10 @@
-function addConfirmation() {
-    const confirmationId = localStorage.getItem("orderConfirmation");
-    const totalPrice = localStorage.getItem("totalPriceConfirmation");
-    const confirmation = document.getElementById("confirmation");
-    const messageConfirmation = document.createElement("p");
-    const confirmationPrice = document.createElement("p");
-    messageConfirmation.innerHTML = "Merci pour votre commande N° " + confirmationId;
-    confirmationPrice.innerHTML = "Prix total de votre commande: " + totalPrice + "€";
-    messageConfirmation.setAttribute("class", "confirmation");
-    confirmation.appendChild(messageConfirmation);
-    confirmation.appendChild(confirmationPrice);
-}
-addConfirmation();
+// get order id from local storage
+const resId = localStorage.getItem("resId");
+
+const totalPrice = localStorage.getItem("totalPrice");
+
+// add to HTML
+const confirmId = document.querySelector("#sumOrder");
+confirmId.innerHTML += `<p>Votre commande N° <span class="insert">${resId} </span>à bien été prises en compte.</p>
+                        <p>Le montant de votre commande est de : ${totalPrice} <span class="insert"></span>euros. </p>`
+                        ;
