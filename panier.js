@@ -2,11 +2,10 @@
 const cartProduct = JSON.parse(localStorage.getItem("cartProduct"));
 console.log(cartProduct);
 const productContainer = document.querySelector("#cartinfo");
-console.log(productContainer);
 // if the cart is empty
 if (cartProduct === null) {
   const cartEmpty = `<div class="container-cart-empty">
-                        <div> Votre panier est vide. </div>
+                        <p> Votre panier est vide. <p>
                       </div>`;
   productContainer.innerHTML = cartEmpty;
 } else {
@@ -25,7 +24,9 @@ if (cartProduct === null) {
                                               <td>${cartProduct[k].camera}</td>
                                               <td>${cartProduct[k].lensSelected}</td>
                                               <td id="price">${cartProduct[k].priceSelected}€</td>
-                                              <td><button>Supprimer</button></td>
+                                              
+                                          </tr>
+                                          <tr><td><button>Supprimer</button></td>
                                           </tr>
                                       </tbody> 
                                   </table>`;
@@ -57,8 +58,8 @@ btn.addEventListener("click", function (event) {
 
   // get form values and put to local storage
   const formValues = {
-    lastmane: document.querySelector("#lastname").value,
-    firstname: document.querySelector("#firstname").value,
+    lastName: document.querySelector("#lastname").value,
+    firstName: document.querySelector("#firstname").value,
     email: document.querySelector("#email").value,
     address: document.querySelector("#address").value,
     city: document.querySelector("#city").value,
@@ -66,35 +67,38 @@ btn.addEventListener("click", function (event) {
   localStorage.setItem("formValues", JSON.stringify(formValues));
 
   // put the values to an object
-  const contact = {
-    lastname: localStorage.getItem("lastname"),
-    firstname: localStorage.getItem("firstname"),
-    email: localStorage.getItem("email"),
-    address: localStorage.getItem("address"),
+  /*const contact = {
+    lastname,
+    firstname,
+    email,
+    address,
     city: localStorage.getItem("city"),
   };
+  const contactValue = JSON.parse(localStorage.getItem("formValues"));
+  console.log(contactValue);*/
 
   const toSend = {
     cartProduct,
-    contact,
-    totalPrice,
+    formValues,
+    /*totalPrice,*/
   };
   console.log(toSend);
+  console.log(JSON.stringify(toSend));
 
   fetch("http://localhost:3000/api/cameras/order", {
     method: "POST",
     headers: {
-      Accept: "application/json",
+      "Accept": "application/json",
       "Content-Type": "application/json",
     },
     body: JSON.stringify(toSend),
   })
     .then(async(res) => {
       //localStorage.setItem("cartProduct", JSON.stringify(cartProduct));
-      const content = await res.json();
+      const orderContent = await res.json();
       console.log(content);
-      localStorage.setItem("resId", content._id);
-      window.location = "confirmation.html";
+      localStorage.setItem("resId", orderContent._id);
+      //window.location = "confirmation.html";
     })
     .catch(function (err) {
       //An error has occurred.

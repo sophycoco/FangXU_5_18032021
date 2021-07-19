@@ -106,12 +106,22 @@ footer {
 
 #cartinfo, table {
     margin: auto;
+    font-size: 20px;
+    letter-spacing: 3px;
 }
+
+td {
+    width: 420px;
+    text-align: end;
+}
+
 
 #totalprice {
     text-align: center;
-    font-weight: 800;
+    font-size: 25px;
 }
 
+
+/* page confirmation */
 #sumOder, p {
     text-align: center;
