@@ -8,21 +8,13 @@ for (l = 0; l < cartProduct.length; l++) {
   products.push(getProductId);
   console.log(products);
 }
-/*const calculateTotalPrice = [];
-
-for (let m = 0; m < cartProduct.length; m++) {
-  let pricesCartProduct = cartProduct[m].priceSelected;
-  calculateTotalPrice.push(pricesCartProduct);
-  console.log(calculateTotalPrice);
-}*/
 
 const productContainer = document.querySelector("#cartinfo");
 // if the cart is empty
-if (cartProduct === null) {
-  const cartEmpty = `<div class="container-cart-empty">
-                        <p> Votre panier est vide. <p>
-                      </div>`;
-  productContainer.innerHTML = cartEmpty;
+if (cartProduct === null || cartProduct ==0) {
+  productContainer.innerHTML = cartEmpty`<div class="container-cart-empty">
+  <p> Votre panier est vide. <p>
+</div>`;
 } else {
   // if the cart is not empty, display the selected cameras
   for (k = 0; k < cartProduct.length; k++) {
@@ -41,7 +33,7 @@ if (cartProduct === null) {
                                               <td id="price">${cartProduct[k].priceSelected}€</td>
                                               
                                           </tr>
-                                          <tr><td><button>Supprimer</button></td>
+                                          <tr><td><button class="btn-delete">Supprimer</button></td>
                                           </tr>
                                       </tbody> 
                                   </table>`;
@@ -81,21 +73,10 @@ btn.addEventListener("click", function (event) {
   };
   localStorage.setItem("contact", JSON.stringify(contact));
 
-  // put the values to an object
-  /*const contact = {
-    lastname,
-    firstname,
-    email,
-    address,
-    city: localStorage.getItem("city"),
-  };
-  const contactValue = JSON.parse(localStorage.getItem("formValues"));
-  console.log(contactValue);*/
 
   const toSend = {
     products,
-    contact,
-    /*totalPrice,*/
+    contact
   };
   console.log(toSend);
   console.log(JSON.stringify(toSend));
@@ -113,7 +94,7 @@ btn.addEventListener("click", function (event) {
       const orderContent = await res.json();
       console.log(orderContent);
       localStorage.setItem("orderId", orderContent.orderId);
-      //window.location = "confirmation.html";
+      window.location = "confirmation.html";
     })
     .catch(function (err) {
       //An error has occurred.
@@ -133,91 +114,14 @@ document.querySelector('.form button[type="button"]').addEventListener("click", 
     alert("Votre commande a bien été envoyé.");
   }
 });
-
 /*
-// send order
-function sendOrder() {
-  const lastName = document.getElementById("lastname").Value;
-  const firstName = document.getElementById("firstname").Value;
-  const email = document.getElementById("email").Value;
-  const address = document.getElementById("address").Value;
-  const city = document.getElementById("city").Value;
-
-  const customerFormInfo = new infoForm(lastName, firstName, email, address, city);
-  const cartContent = JSON.parse(localStorage.getItem("cartProduct"));
-  let idOrder = [];
-  for (let i = 0; i < cartContent.length; i = i++) {
-    cartContent[i].id;
-    idOrder.push(cartProduct[i].id);
+// delete button
+let btnDelete = document.querySelectorAll(".btn-delete");
+console.log(btnDelete);
+for (let n = 0; n < btnDelete.length; n++) {
+  btnDelete[n].addEventListener("click", function(event) {
+    event.preventDefault();
+    let id_deleteSelecter = 
   }
-  const order = new orderInfo(customerFormInfo, idOrder);
-  fetch("http://localhost:3000/api/cameras/order", {
-    method: "POST",
-    headers: {
-      "Accept": "application/json",
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(order),
-  })
-    .then(function (res) {
-      localStorage.setItem("cartContent", JSON.stringify([]));
-      localStorage.setItem("orderConfirmation", res.orderId);
-      window.location = "confirmation.html";
-    })
-    .catch(function (err) {
-      console.log(err);
-    });
 }
-
-fetch("http://localhost:3000/api/cameras/")
-  .then(function (res) {
-    const cartProduct = JSON.parse(localStorage.getItem("cartProduct"));
-    const cartInfo = document.createElement("product-cart");
-    if (cartProduct.length == 0) {
-      emptyCartMessage(cartInfo);
-    } else {
-      let totalPrice = 0;
-      const cartContent = JSON.parse(localStorage.getItem("cartProduct"));
-      for (let productCart of cartContent) {
-        for (let productInfo of res) {
-          if (productCart.id == productInfo._id) {
-            totalPrice = addCartProduct(productInfo, productCart, cartProduct, totalPrice);
-            localStorage.setItem("totalPriceConfiarmationPage", totalPrice);
-          }
-        }
-      }
-
-      const totalPriceCart = document.getElementsById("total-price");
-      totalPriceCart.innerHTML = "Total : " + totalPrice + "€";
-    }
-    
-if (res.ok) {
-  return res.json();
-}
-  })
-  .catch(function (err) {
-    console.log(err);
-  });
-// customer information form
-document.querySelector('.form button[type="button"]').addEventListener("click", function () {
-  var valid = true;
-  for (let input of document.querySelectorAll(".form input, .form textarea")) {
-    valid &= input.reportValidity();
-    if (!valid) {
-      break;
-    }
-  }
-  if (valid) {
-    alert("Votre commande a bien été envoyé.");
-  }
-}); 
-
-
-const btn = document.querySelector('.form button[type="button"]');
-
-btn.addEventListener("click", function (event) {
-  event.preventDefault();
-  
-    sendOrder();
-  
-}); */
+*/

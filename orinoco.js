@@ -8,8 +8,7 @@ fetch("http://localhost:3000/api/cameras")
     console.log(jsonArticleList);
     for (let jsonArticle of jsonArticleList) {
       let article = new Article(jsonArticle);
-      document.querySelector(".container").innerHTML += `<div class="">
-                                                                <div class="card article data-id=${article._id}">
+      document.querySelector(".container").innerHTML += `<div class="card article data-id=${article._id}">
                                                                     <div class="card-header ">
                                                                         <h3 class="card-title">${article.name}</h3>
                                                                     </div>
@@ -19,21 +18,9 @@ fetch("http://localhost:3000/api/cameras")
 
                                                                         <p class="card-text">Prix : ${article.price}€</p>                                                  
                                                                     </div>
-                                                                </div>
-                                                            </div>`;
+                                                                </div>`;
     }
   })
   .catch(function (err) {
     //An error has occurred.
   });
-
-  /*
-                                                                          <div class="card-lense>
-                                                                          <label for="lensChoice">Objectif: </label>
-                                                                          <select id="lensChoice">
-                                                                            <option value="${article.lenses[0]}">${article.lenses[0]}</option>
-                                                                            <option value="${article.lenses[1]}">${article.lenses[1]}</option>
-                                                                            <option value="${article.lenses[2]}">${article.lenses[2]}</option>
-                                                                          </select>                                                                         
-                                                                        </div>
-                                                                        */

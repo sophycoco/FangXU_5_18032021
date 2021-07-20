@@ -34,7 +34,7 @@ fetch("http://localhost:3000/api/cameras/" + id)
     const priceSelected = article.price;
     const camera = article.name;
     document.querySelector(".productcontainer").innerHTML += `<div class="">
-                                                            <div class="card article data-id=${article._id}">
+                                                            <div class="card-single article data-id=${article._id}">
                                                                 <div class="card-header ">
                                                                     <h3 class="card-title">${article.name}</h3>
                                                                 </div>
