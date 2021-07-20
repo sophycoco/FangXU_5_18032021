@@ -1,6 +1,5 @@
 // get order id from local storage
-const getOrderId = localStorage.getItem("orderId");
-
+const orderId = localStorage.getItem("orderId");
 const totalPrice = localStorage.getItem("totalPrice");
 
 // add to HTML

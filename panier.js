@@ -3,11 +3,18 @@ const cartProduct = JSON.parse(localStorage.getItem("cartProduct"));
 console.log(cartProduct);
 
 const products = [];
-for (i = 0; i < cartProduct.length; i++) {
-  let getProductId = cartProduct[i]._id;
+for (l = 0; l < cartProduct.length; l++) {
+  let getProductId = cartProduct[l].id;
   products.push(getProductId);
   console.log(products);
 }
+/*const calculateTotalPrice = [];
+
+for (let m = 0; m < cartProduct.length; m++) {
+  let pricesCartProduct = cartProduct[m].priceSelected;
+  calculateTotalPrice.push(pricesCartProduct);
+  console.log(calculateTotalPrice);
+}*/
 
 const productContainer = document.querySelector("#cartinfo");
 // if the cart is empty
@@ -86,7 +93,7 @@ btn.addEventListener("click", function (event) {
   console.log(contactValue);*/
 
   const toSend = {
-    cartProduct,
+    products,
     contact,
     /*totalPrice,*/
   };
@@ -105,7 +112,7 @@ btn.addEventListener("click", function (event) {
       //localStorage.setItem("cartProduct", JSON.stringify(cartProduct));
       const orderContent = await res.json();
       console.log(orderContent);
-      localStorage.setItem("orderId", orderContent._id);
+      localStorage.setItem("orderId", orderContent.orderId);
       //window.location = "confirmation.html";
     })
     .catch(function (err) {
