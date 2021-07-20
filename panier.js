@@ -1,6 +1,14 @@
 // sum of order
 const cartProduct = JSON.parse(localStorage.getItem("cartProduct"));
 console.log(cartProduct);
+
+const products = [];
+for (i = 0; i < cartProduct.length; i++) {
+  let getProductId = cartProduct[i]._id;
+  products.push(getProductId);
+  console.log(products);
+}
+
 const productContainer = document.querySelector("#cartinfo");
 // if the cart is empty
 if (cartProduct === null) {
@@ -57,14 +65,14 @@ btn.addEventListener("click", function (event) {
   event.preventDefault();
 
   // get form values and put to local storage
-  const formValues = {
+  const contact = {
     lastName: document.querySelector("#lastname").value,
     firstName: document.querySelector("#firstname").value,
     email: document.querySelector("#email").value,
     address: document.querySelector("#address").value,
     city: document.querySelector("#city").value,
   };
-  localStorage.setItem("formValues", JSON.stringify(formValues));
+  localStorage.setItem("contact", JSON.stringify(contact));
 
   // put the values to an object
   /*const contact = {
@@ -79,7 +87,7 @@ btn.addEventListener("click", function (event) {
 
   const toSend = {
     cartProduct,
-    formValues,
+    contact,
     /*totalPrice,*/
   };
   console.log(toSend);
@@ -96,8 +104,8 @@ btn.addEventListener("click", function (event) {
     .then(async(res) => {
       //localStorage.setItem("cartProduct", JSON.stringify(cartProduct));
       const orderContent = await res.json();
-      console.log(content);
-      localStorage.setItem("resId", orderContent._id);
+      console.log(orderContent);
+      localStorage.setItem("orderId", orderContent._id);
       //window.location = "confirmation.html";
     })
     .catch(function (err) {
