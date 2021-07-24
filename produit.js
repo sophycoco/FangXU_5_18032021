@@ -5,6 +5,7 @@ function getId() {
   const id = param.replace("?id=", "");
   return id;
 }
+console.log(getId());
 
 // add to cart
 function addToCart(camera, lensSelected, priceSelected) {
