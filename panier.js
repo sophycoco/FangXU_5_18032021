@@ -12,10 +12,9 @@ for (l = 0; l < cartProduct.length; l++) {
 const productContainer = document.querySelector("#cartinfo");
 // if the cart is empty
 if (cartProduct == null || cartProduct == 0) {
-  break;
-  /*productContainer.innerHTML = `<div class="container-cart-empty">
+  productContainer.innerHTML = `<div class="container-cart-empty">
   <p class="cart-empty"> Votre panier est vide. <p>
-</div>`;*/
+</div>`;
 } else {
   // if the cart is not empty, display the selected cameras
   for (k = 0; k < cartProduct.length; k++) {
@@ -74,28 +73,35 @@ btn.addEventListener("click", function (event) {
   };
   localStorage.setItem("contact", JSON.stringify(contact));
 
-
   const toSend = {
     products,
-    contact
+    contact,
   };
+
   console.log(toSend);
   console.log(JSON.stringify(toSend));
 
   fetch("http://localhost:3000/api/cameras/order", {
     method: "POST",
     headers: {
-      "Accept": "application/json",
+      Accept: "application/json",
       "Content-Type": "application/json",
     },
     body: JSON.stringify(toSend),
   })
-    .then(async(res) => {
+    .then(async (res) => {
       //localStorage.setItem("cartProduct", JSON.stringify(cartProduct));
       const orderContent = await res.json();
       console.log(orderContent);
       localStorage.setItem("orderId", orderContent.orderId);
-      //window.location = "confirmation.html";
+
+      /*for (let x = 0; x < products.length; x++) {
+        if (x === 0) {
+          break;          
+        } else {
+          window.location = "confirmation.html";*/
+        
+      
     })
     .catch(function (err) {
       //An error has occurred.
@@ -112,8 +118,13 @@ document.querySelector('.form button[type="button"]').addEventListener("click", 
     }
   }
   if (valid) {
+    if (cartProduct != 0) {
     alert("Votre commande a bien été envoyé.");
     window.location = "confirmation.html";
+  }else{
+    alert("Merci de choisir votre appareil.");
+    window.location = "panier.html";
+  }
   }
 });
 
@@ -121,15 +132,15 @@ document.querySelector('.form button[type="button"]').addEventListener("click", 
 let btnDelete = document.querySelectorAll(".btn-delete");
 console.log(btnDelete);
 for (let n = 0; n < btnDelete.length; n++) {
-  btnDelete[n].addEventListener("click", function(event) {
+  btnDelete[n].addEventListener("click", function (event) {
     event.preventDefault();
     let id_deleteSelecter = cartProduct[n].id;
     console.log(id_deleteSelecter);
 
-    cartProduct = cartProduct.filter( (el) => el.id !== id_deleteSelecter);
+    cartProduct = cartProduct.filter((el) => el.id !== id_deleteSelecter);
     console.log(cartProduct);
 
     localStorage.setItem("cartProduct", JSON.stringify(cartProduct));
     window.location = "panier.html";
-  })
+  });
 }
