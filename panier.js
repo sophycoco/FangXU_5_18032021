@@ -19,19 +19,11 @@ if (cartProduct == null || cartProduct == 0) {
   // if the cart is not empty, display the selected cameras
   for (k = 0; k < cartProduct.length; k++) {
     productContainer.innerHTML += `<table>
-                                     <!--<thead>
-                                          <tr>
-                                              <th>Produits Sélectionnés</th>
-                                              <th>Objectifs Sélectionnés</th>
-                                              <th>Prix</th>
-                                          </tr>
-                                      </thead>  -->
                                       <tbody>
                                           <tr>
                                               <td>${cartProduct[k].camera}</td>
                                               <td>${cartProduct[k].lensSelected}</td>
-                                              <td id="price">${cartProduct[k].priceSelected}€</td>
-                                              
+                                              <td id="price">${cartProduct[k].priceSelected}€</td>    
                                           </tr>
                                           <tr><td><button class="btn-delete">Supprimer</button></td>
                                           </tr>
@@ -90,18 +82,9 @@ btn.addEventListener("click", function (event) {
     body: JSON.stringify(toSend),
   })
     .then(async (res) => {
-      //localStorage.setItem("cartProduct", JSON.stringify(cartProduct));
       const orderContent = await res.json();
       console.log(orderContent);
       localStorage.setItem("orderId", orderContent.orderId);
-
-      /*for (let x = 0; x < products.length; x++) {
-        if (x === 0) {
-          break;          
-        } else {
-          window.location = "confirmation.html";*/
-        
-      
     })
     .catch(function (err) {
       //An error has occurred.
@@ -119,12 +102,12 @@ document.querySelector('.form button[type="button"]').addEventListener("click", 
   }
   if (valid) {
     if (cartProduct != 0) {
-    alert("Votre commande a bien été envoyé.");
-    window.location = "confirmation.html";
-  }else{
-    alert("Merci de choisir votre appareil.");
-    window.location = "panier.html";
-  }
+      alert("Votre commande a bien été envoyé.");
+      window.location = "confirmation.html";
+    } else {
+      alert("Merci de choisir votre appareil.");
+      window.location = "panier.html";
+    }
   }
 });
 

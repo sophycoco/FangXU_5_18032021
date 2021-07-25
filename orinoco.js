@@ -12,10 +12,11 @@ fetch("http://localhost:3000/api/cameras")
                                                                     <div class="card-header ">
                                                                         <h3 class="card-title">${article.name}</h3>
                                                                     </div>
-                                                                    <a href="produit.html?id=${article._id}"><img src="${article.imageUrl}" class="card-img" /></a>
+                                                                    <a href="produit.html?id=${article._id}">
+                                                                      <img src="${article.imageUrl}" class="card-img" />
+                                                                    </a>
                                                                     <div class="card-body">
                                                                         <p class="card-text">${article.description}</p>
-
                                                                         <p class="card-text">Prix : ${article.price}€</p>                                                  
                                                                     </div>
                                                                 </div>`;
