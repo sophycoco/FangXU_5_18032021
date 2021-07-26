@@ -44,15 +44,19 @@ fetch("http://localhost:3000/api/cameras/" + id)
                                                                       <div class="card-lense>
                                                                           <label for="lensChoice">Objectif : </label>
                                                                           <select id="lensChoice">
-                                                                          <option value="${article.lenses[0]}">${article.lenses[0]}</option>
-                                                                          <option value="${article.lenses[1]}">${article.lenses[1]}</option>
-                                                                          <option value="${article.lenses[2]}">${article.lenses[2]}</option>
+                                                                          
                                                                           </select>                                                                         
                                                                       </div>
                                                                       <p class="card-text" id="price">Prix : ${article.price}€</p>
                                                                       <button id="btn">Ajouter au panier </button>
                                                                   </div>
                                                               </div>`;
+                //document.getElementById()
+                for(let option of article.lenses) {
+                  console.log(option);
+                  document.getElementById("lensChoice").innerHTML +=`
+                  <option value="${option}">${option}</option>`;
+                }                                            
                                                         
 // add to cart
 
