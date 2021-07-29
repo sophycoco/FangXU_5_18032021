@@ -117,10 +117,15 @@ console.log(btnDelete);
 for (let n = 0; n < btnDelete.length; n++) {
   btnDelete[n].addEventListener("click", function (event) {
     event.preventDefault();
+    let lenses_deleteSelecter = cartProduct[n].lensSelected;
     let id_deleteSelecter = cartProduct[n].id;
+    console.log(lenses_deleteSelecter);
+
+    cartProduct = cartProduct.filter((el) => el.lensSelected !== lenses_deleteSelecter || el.id !== id_deleteSelecter);
+    /*let id_deleteSelecter = cartProduct[n].id;
     console.log(id_deleteSelecter);
 
-    cartProduct = cartProduct.filter((el) => el.id !== id_deleteSelecter);
+    cartProduct = cartProduct.filter((el) => el.id !== id_deleteSelecter);*/
     console.log(cartProduct);
 
     localStorage.setItem("cartProduct", JSON.stringify(cartProduct));
