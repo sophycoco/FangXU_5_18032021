@@ -51,7 +51,7 @@ fetch("http://localhost:3000/api/cameras/" + id)
                                                                       <button id="btn">Ajouter au panier </button>
                                                                   </div>
                                                               </div>`;
-                //document.getElementById()
+                // add lens choices
                 for(let option of article.lenses) {
                   console.log(option);
                   document.getElementById("lensChoice").innerHTML +=`
