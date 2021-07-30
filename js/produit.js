@@ -10,7 +10,7 @@ console.log(getId());
 // add to cart
 function addToCart(camera, lensSelected, priceSelected) {
   let cartProduct = JSON.parse(localStorage.getItem("cartProduct"));
-  
+
   if (cartProduct == null) {
     cartProduct = [];
   }
@@ -51,15 +51,13 @@ fetch("http://localhost:3000/api/cameras/" + id)
                                                                       <button id="btn">Ajouter au panier </button>
                                                                   </div>
                                                               </div>`;
-                // add lens choices
-                for(let option of article.lenses) {
-                  console.log(option);
-                  document.getElementById("lensChoice").innerHTML +=`
+    // add lens choices
+    for (let option of article.lenses) {
+      console.log(option);
+      document.getElementById("lensChoice").innerHTML += `
                   <option value="${option}">${option}</option>`;
-                }                                            
-                                                        
-// add to cart
-
+    }
+    // add to cart
     const btn = document.getElementById("btn");
     btn.addEventListener("click", function () {
       const lenses = document.getElementById("lensChoice");
@@ -68,5 +66,3 @@ fetch("http://localhost:3000/api/cameras/" + id)
       alert("Ajouté au panier !");
     });
   });
-  
-  

@@ -3,10 +3,12 @@ let cartProduct = JSON.parse(localStorage.getItem("cartProduct"));
 console.log(cartProduct);
 
 const products = [];
-for (l = 0; l < cartProduct.length; l++) {
-  let getProductId = cartProduct[l].id;
-  products.push(getProductId);
-  console.log(products);
+if (cartProduct != null) {
+  for (l = 0; l < cartProduct.length; l++) {
+    let getProductId = cartProduct[l].id;
+    products.push(getProductId);
+    console.log(products);
+  }
 }
 
 const productContainer = document.querySelector("#cartinfo");
@@ -34,20 +36,22 @@ if (cartProduct == null || cartProduct == 0) {
 // total price calculation
 const calculateTotalPrice = [];
 
-for (let m = 0; m < cartProduct.length; m++) {
-  let pricesCartProduct = cartProduct[m].priceSelected;
-  calculateTotalPrice.push(pricesCartProduct);
-  console.log(calculateTotalPrice);
+if (cartProduct != null) {
+  for (let m = 0; m < cartProduct.length; m++) {
+    let pricesCartProduct = cartProduct[m].priceSelected;
+    calculateTotalPrice.push(pricesCartProduct);
+    console.log(calculateTotalPrice);
+  }
+  const reducer = (accumulator, currentValue) => accumulator + currentValue;
+  const totalPrice = calculateTotalPrice.reduce(reducer, 0);
+  console.log(totalPrice);
+
+  localStorage.setItem("totalPrice", JSON.stringify(totalPrice));
+
+  // add to HTML
+  const totalPriceHtml = document.getElementById("totalprice");
+  totalPriceHtml.innerHTML += `Total price : ${totalPrice}€`;
 }
-const reducer = (accumulator, currentValue) => accumulator + currentValue;
-const totalPrice = calculateTotalPrice.reduce(reducer, 0);
-console.log(totalPrice);
-
-localStorage.setItem("totalPrice", JSON.stringify(totalPrice));
-
-// add to HTML
-const totalPriceHtml = document.getElementById("totalprice");
-totalPriceHtml.innerHTML += `Total price : ${totalPrice}€`;
 
 // add event listener
 const btn = document.querySelector("#btn");
@@ -121,8 +125,7 @@ for (let n = 0; n < btnDelete.length; n++) {
     let id_deleteSelecter = cartProduct[n].id;
     console.log(lenses_deleteSelecter);
 
-    cartProduct = cartProduct.filter((el) => el.lensSelected !== lenses_deleteSelecter
-     || el.id !== id_deleteSelecter);
+    cartProduct = cartProduct.filter((el) => el.lensSelected !== lenses_deleteSelecter || el.id !== id_deleteSelecter);
     console.log(cartProduct);
 
     localStorage.setItem("cartProduct", JSON.stringify(cartProduct));
